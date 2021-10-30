@@ -1,4 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
+import { HousingService } from 'src/app/services/housing.service';
 
 @Component({
   selector: 'app-property-list',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PropertyListComponent implements OnInit {
 
-  constructor() { }
+  properties: any;
+
+  constructor(private housingService:HousingService) { }
 
   ngOnInit(): void {
+    this.housingService.getAllProperties().subscribe( data=>{
+
+      console.log(data);
+     this.properties=data;
+        },error=>{console.log(error)});
+
+    // this.http.get('data/properties.json').subscribe(
+    //   data=>{
+
+    //     console.log(data);
+    //     this.properties=data;
+    //   }
+    // );
   }
 
 }
